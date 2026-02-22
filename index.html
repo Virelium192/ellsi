@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELSIE - AI-Powered Learning Revolution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary-gold: #FFD700;
+            --deep-gold: #B8860B;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --liquid-glow: rgba(255, 215, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Liquid Glass Effect */
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.37),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .liquid-glass-strong {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 8px 40px 0 rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Animated Background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 140, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 60%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
+                linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #0a0a0a 100%);
+            animation: gradientShift 20s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.5) 0%, transparent 70%);
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+            bottom: 20%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(30px, 50px) scale(1.05); }
+        }
+
+        /* Navigation */
+        .nav-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .nav-visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Hamburger Menu */
+        .hamburger-line {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hamburger-active .line-1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-active .line-2 {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .hamburger-active .line-3 {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            clip-path: circle(0% at calc(100% - 40px) 40px);
+            transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu-active {
+            clip-path: circle(150% at calc(100% - 40px) 40px);
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(255, 215, 0, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #FFD700, #B8860B);
+            border-radius: 4px;
+        }
+
+        /* Button Effects */
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Category Badge */
+        .category-badge {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .category-badge:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Logo Animation */
+        .logo-pulse {
+            animation: logoPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
+            50% { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); }
+        }
+
+        /* Section Divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+        }
+
+        /* Number Counter Animation */
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Grid Pattern Overlay */
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Animated Background -->
+    <div class="gradient-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="fixed inset-0 grid-pattern pointer-events-none z-0"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 nav-hidden">
+        <div class="liquid-glass-strong mx-4 mt-4 rounded-2xl px-6 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center logo-pulse">
+                        <i data-lucide="brain-circuit" class="w-6 h-6 text-black"></i>
+                    </div>
+                    <span class="font-display font-bold text-2xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">
+                        ELSIE
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="features.html" class="text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors relative group">
+                        Features
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="technology.html" class="text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors relative group">
+                        Technology
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="how it works.html" class="text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors relative group">
+                        How It Works
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <button class="btn-primary px-6 py-2.5 rounded-full font-semibold text-black text-sm hover:scale-105 transition-transform">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Hamburger Menu -->
+                <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2 z-50">
+                    <span class="hamburger-line line-1 w-6 h-0.5 bg-white rounded-full"></span>
+                    <span class="hamburger-line line-2 w-6 h-0.5 bg-white rounded-full"></span>
+                    <span class="hamburger-line line-3 w-6 h-0.5 bg-white rounded-full"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-black/95 backdrop-blur-xl z-40 flex items-center justify-center md:hidden">
+            <div class="flex flex-col items-center gap-8 text-center">
+                <a href="index.html" class="text-3xl font-display font-bold text-white hover:text-yellow-400 transition-colors mobile-link">Home</a>
+                <a href="features.html" class="text-3xl font-display font-bold text-white hover:text-yellow-400 transition-colors mobile-link">Features</a>
+                <a href="technology.html" class="text-3xl font-display font-bold text-white hover:text-yellow-400 transition-colors mobile-link">Technology</a>
+                <a href="how it works.html" class="text-3xl font-display font-bold text-white hover:text-yellow-400 transition-colors mobile-link">How It Works</a>
+                <button class="btn-primary px-8 py-3 rounded-full font-bold text-black mt-4 mobile-link">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center px-4 pt-20">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="reveal active">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full liquid-glass mb-8 category-badge">
+                    <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                    <span class="text-sm font-medium text-yellow-400">AI-Powered Education Revolution</span>
+                </div>
+                
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6">
+                    Learn Smarter.<br>
+                    <span class="text-gradient">Earn Faster.</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+                    The world's first AI learning engine that adapts to your brain, 
+                    funds your growth, and connects skills directly to income.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                    <button class="btn-primary px-8 py-4 rounded-full font-bold text-black text-lg hover:scale-105 transition-transform flex items-center gap-2">
+                        Start Learning Free
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                    <button class="liquid-glass px-8 py-4 rounded-full font-semibold text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                        <i data-lucide="play-circle" class="w-5 h-5"></i>
+                        Watch Demo
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                    <div class="liquid-glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 counter" data-target="100">0</div>
+                        <div class="text-sm text-gray-400">Languages</div>
+                    </div>
+                    <div class="liquid-glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 counter" data-target="24">0</div>
+                        <div class="text-sm text-gray-400">7 AI Coach</div>
+                    </div>
+                    <div class="liquid-glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 counter" data-target="10">0</div>
+                        <div class="text-sm text-gray-400">M+ Learners</div>
+                    </div>
+                    <div class="liquid-glass rounded-2xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 counter" data-target="95">0</div>
+                        <div class="text-sm text-gray-400">% Skill ROI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-yellow-400"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                    Ten Pillars of <span class="text-gradient">Future Learning</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Revolutionary features designed to democratize education and maximize human potential.
+                </p>
+            </div>
+
+            <!-- Feature Categories -->
+            <div class="space-y-12">
+                
+                <!-- I. AI-Powered Personalized Learning -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 flex items-center justify-center border border-yellow-400/30">
+                            <i data-lucide="brain" class="w-6 h-6 text-yellow-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">I. AI-Powered Personalized Learning</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="scan" class="w-6 h-6 text-yellow-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Skill-Gap AI Scanner</h4>
+                            <p class="text-gray-400 text-sm">Analyzes goals, background, and market demand to identify exact skills needed.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="clock" class="w-6 h-6 text-yellow-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Time-Bound Learning Paths</h4>
+                            <p class="text-gray-400 text-sm">"Learn X in 14 days / 30 days / 90 days" with guaranteed outcomes.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 text-yellow-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Adaptive Curriculum Engine</h4>
+                            <p class="text-gray-400 text-sm">Content reshapes in real-time based on your performance and pace.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="bot" class="w-6 h-6 text-yellow-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">AI Learning Coach</h4>
+                            <p class="text-gray-400 text-sm">24/7 mentor that explains concepts in multiple ways until you master them.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="gauge" class="w-6 h-6 text-yellow-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Cognitive Load Optimizer</h4>
+                            <p class="text-gray-400 text-sm">Adjusts lesson difficulty dynamically to prevent burnout.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="eye" class="w-6 h-6 text-yellow-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Learning Style Detection</h4>
+                            <p class="text-gray-400 text-sm">Visual, auditory, kinesthetic, or mixed—personalized to your brain.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- II. Just-in-Time Education -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400/20 to-red-600/20 flex items-center justify-center border border-orange-400/30">
+                            <i data-lucide="zap" class="w-6 h-6 text-orange-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">II. Just-in-Time Education</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-orange-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-orange-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="rocket" class="w-6 h-6 text-orange-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">"Learn for Tomorrow" Mode</h4>
+                            <p class="text-gray-400 text-sm">Crash courses for urgent needs and immediate application.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-orange-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-orange-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="shield" class="w-6 h-6 text-orange-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Crisis Skill Kits</h4>
+                            <p class="text-gray-400 text-sm">Emergency skills for job loss, sudden opportunities, or career pivots.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-orange-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-orange-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="target" class="w-6 h-6 text-orange-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Role-Specific Learning</h4>
+                            <p class="text-gray-400 text-sm">"Teach me only what a junior data analyst needs"—precise targeting.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- III. Funding & Financial Inclusion -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400/20 to-emerald-600/20 flex items-center justify-center border border-green-400/30">
+                            <i data-lucide="banknote" class="w-6 h-6 text-green-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">III. Funding & Financial Inclusion</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-green-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-green-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="hand-coins" class="w-6 h-6 text-green-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Income-Share Agreements</h4>
+                            <p class="text-gray-400 text-sm">Pay only after you start earning. Zero upfront cost education.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-green-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-green-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="coins" class="w-6 h-6 text-green-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Skill-Backed Micro-Loans</h4>
+                            <p class="text-gray-400 text-sm">AI predicts your ROI before approving funding for your education.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-green-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-green-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="users" class="w-6 h-6 text-green-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Sponsor-a-Learner</h4>
+                            <p class="text-gray-400 text-sm">Marketplace connecting donors with ambitious learners worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IV. Global Access -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400/20 to-cyan-600/20 flex items-center justify-center border border-blue-400/30">
+                            <i data-lucide="globe" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">IV. Global & Future-Proof Access</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-blue-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-blue-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="wifi-off" class="w-6 h-6 text-blue-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Offline-First Learning</h4>
+                            <p class="text-gray-400 text-sm">Download entire curriculums. Learn without internet connectivity.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-blue-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-blue-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="signal" class="w-6 h-6 text-blue-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Ultra-Low-Data Version</h4>
+                            <p class="text-gray-400 text-sm">Optimized for Africa & Global South. Less than 1MB per lesson.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-blue-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-blue-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="languages" class="w-6 h-6 text-blue-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">100+ Language Translation</h4>
+                            <p class="text-gray-400 text-sm">AI-powered real-time translation preserving context and nuance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- V. Skill Validation -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400/20 to-pink-600/20 flex items-center justify-center border border-purple-400/30">
+                            <i data-lucide="badge-check" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">V. Skill Validation & Real-World Proof</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-purple-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-purple-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="folder-check" class="w-6 h-6 text-purple-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Project-Only Assessment</h4>
+                            <p class="text-gray-400 text-sm">No exams. Prove skills through real-world project submissions.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-purple-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-purple-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="briefcase" class="w-6 h-6 text-purple-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Real Client Challenges</h4>
+                            <p class="text-gray-400 text-sm">Work on actual company problems. Build portfolio with impact.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-purple-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-purple-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="blockchain" class="w-6 h-6 text-purple-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Blockchain Credentials</h4>
+                            <p class="text-gray-400 text-sm">Tamper-proof, verifiable skill badges on the blockchain.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VI. Career Integration -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-400/20 to-rose-600/20 flex items-center justify-center border border-red-400/30">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-red-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">VI. Career & Income Integration</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-red-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-red-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="map" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">AI Career Pathfinder</h4>
+                            <p class="text-gray-400 text-sm">Discover optimal career paths based on your skills and market demand.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-red-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-red-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="handshake" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Freelance Gig Matching</h4>
+                            <p class="text-gray-400 text-sm">Auto-matched with paid projects as you learn. Earn while studying.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-red-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-red-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="calculator" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Skill-to-Income Calculator</h4>
+                            <p class="text-gray-400 text-sm">Real-time salary predictions based on your current skill portfolio.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VII. Social & Community -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-400/20 to-violet-600/20 flex items-center justify-center border border-indigo-400/30">
+                            <i data-lucide="users-2" class="w-6 h-6 text-indigo-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">VII. Social & Network Effects</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-indigo-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-indigo-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="network" class="w-6 h-6 text-indigo-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Skill-Based Social Graph</h4>
+                            <p class="text-gray-400 text-sm">Connect based on abilities, not followers. Meritocratic networking.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-indigo-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-indigo-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="exchange" class="w-6 h-6 text-indigo-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Peer Skill Trading</h4>
+                            <p class="text-gray-400 text-sm">Teach what you know, learn what you don't. Barter system for skills.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-indigo-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-indigo-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="trophy" class="w-6 h-6 text-indigo-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Live Global Hackathons</h4>
+                            <p class="text-gray-400 text-sm">Compete, collaborate, and showcase skills in real-time events.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIII. Future Tech -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/20 to-teal-600/20 flex items-center justify-center border border-cyan-400/30">
+                            <i data-lucide="cpu" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">VIII. AI & Future Technologies</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-cyan-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-cyan-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-cyan-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">AI-Generated Custom Courses</h4>
+                            <p class="text-gray-400 text-sm">Courses created on-demand for any niche skill you need.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-cyan-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-cyan-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="user-circle" class="w-6 h-6 text-cyan-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Digital Twin Learner</h4>
+                            <p class="text-gray-400 text-sm">AI avatar that learns your patterns and optimizes your education.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-cyan-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-cyan-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="glasses" class="w-6 h-6 text-cyan-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">VR/AR Skill Simulations</h4>
+                            <p class="text-gray-400 text-sm">Immersive practice environments for high-stakes skills.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IX. System Impact -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400/20 to-yellow-600/20 flex items-center justify-center border border-amber-400/30">
+                            <i data-lucide="landmark" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">IX. System-Level Impact</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-amber-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-amber-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="bar-chart-3" class="w-6 h-6 text-amber-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">National Skill Gap Dashboards</h4>
+                            <p class="text-gray-400 text-sm">Real-time workforce analytics for governments and institutions.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-amber-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-amber-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="heart-handshake" class="w-6 h-6 text-amber-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Public-Private Partnerships</h4>
+                            <p class="text-gray-400 text-sm">Bridging education and industry needs at scale.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-amber-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-amber-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="helping-hand" class="w-6 h-6 text-amber-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Refugee & Displaced Learner Mode</h4>
+                            <p class="text-gray-400 text-sm">Specialized support for disrupted educational journeys.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- X. Psychology & Motivation -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400/20 to-pink-600/20 flex items-center justify-center border border-rose-400/30">
+                            <i data-lucide="heart" class="w-6 h-6 text-rose-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-gradient">X. Psychology & Human Design</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-rose-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-rose-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="battery-warning" class="w-6 h-6 text-rose-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Burnout Prediction System</h4>
+                            <p class="text-gray-400 text-sm">AI detects stress patterns before they impact learning.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-rose-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-rose-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="gamepad-2" class="w-6 h-6 text-rose-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Gamified Mastery Progression</h4>
+                            <p class="text-gray-400 text-sm">Dopamine-smart rewards designed by behavioral psychologists.</p>
+                        </div>
+                        <div class="feature-card liquid-glass rounded-2xl p-6 border-rose-400/20">
+                            <div class="feature-icon w-12 h-12 rounded-lg bg-rose-400/10 flex items-center justify-center mb-4">
+                                <i data-lucide="crown" class="w-6 h-6 text-rose-400"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">Legacy Builder Mode</h4>
+                            <p class="text-gray-400 text-sm">Teach what you master. Build your educational legacy.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="py-24 px-4 relative">
+        <div class="section-divider mb-16"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                        Powered by <span class="text-gradient">Liquid Intelligence</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Our proprietary AI engine doesn't just deliver content—it understands how you think, 
+                        predicts when you'll struggle, and adapts in milliseconds to keep you in the optimal 
+                        learning zone.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-yellow-400/10 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="brain-circuit" class="w-5 h-5 text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Neural Architecture</h4>
+                                <p class="text-sm text-gray-400">Transformer-based models fine-tuned on 10M+ learning interactions.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-yellow-400/10 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Privacy-First Design</h4>
+                                <p class="text-sm text-gray-400">Federated learning keeps your data on your device.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-yellow-400/10 flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Edge Computing</h4>
+                                <p class="text-sm text-gray-400">Lightning-fast responses even on low-end devices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal relative">
+                    <div class="liquid-glass-strong rounded-3xl p-8 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-sm font-medium text-gray-400">AI Processing Core</span>
+                                <span class="flex items-center gap-2 text-xs text-green-400">
+                                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                                    Live
+                                </span>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-yellow-400 to-orange-400 w-3/4 animate-pulse"></div>
+                                </div>
+                                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-yellow-400 to-orange-400 w-1/2 animate-pulse" style="animation-delay: 0.2s"></div>
+                                </div>
+                                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-yellow-400 to-orange-400 w-5/6 animate-pulse" style="animation-delay: 0.4s"></div>
+                                </div>
+                            </div>
+                            <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                                <div class="liquid-glass rounded-lg p-3">
+                                    <div class="text-2xl font-bold text-gradient">98%</div>
+                                    <div class="text-xs text-gray-400">Accuracy</div>
+                                </div>
+                                <div class="liquid-glass rounded-lg p-3">
+                                    <div class="text-2xl font-bold text-gradient">&lt;50ms</div>
+                                    <div class="text-xs text-gray-400">Latency</div>
+                                </div>
+                                <div class="liquid-glass rounded-lg p-3">
+                                    <div class="text-2xl font-bold text-gradient">∞</div>
+                                    <div class="text-xs text-gray-400">Scale</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-24 px-4 relative">
+        <div class="section-divider mb-16"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                    Three Steps to <span class="text-gradient">Transformation</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal liquid-glass rounded-3xl p-8 text-center relative group hover:scale-105 transition-transform duration-500">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-black font-bold text-xl shadow-lg shadow-yellow-400/30">1</div>
+                    <div class="mt-6 mb-4">
+                        <i data-lucide="scan-face" class="w-16 h-16 text-yellow-400 mx-auto mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-display text-xl font-bold mb-2">Scan & Discover</h3>
+                        <p class="text-gray-400 text-sm">Our AI analyzes your current skills, goals, and market demand to create your unique learning DNA.</p>
+                    </div>
+                </div>
+
+                <div class="reveal liquid-glass rounded-3xl p-8 text-center relative group hover:scale-105 transition-transform duration-500" style="transition-delay: 0.1s">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-black font-bold text-xl shadow-lg shadow-yellow-400/30">2</div>
+                    <div class="mt-6 mb-4">
+                        <i data-lucide="route" class="w-16 h-16 text-yellow-400 mx-auto mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-display text-xl font-bold mb-2">Learn & Adapt</h3>
+                        <p class="text-gray-400 text-sm">Follow your personalized path that evolves in real-time as you progress. AI coach available 24/7.</p>
+                    </div>
+                </div>
+
+                <div class="reveal liquid-glass rounded-3xl p-8 text-center relative group hover:scale-105 transition-transform duration-500" style="transition-delay: 0.2s">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-black font-bold text-xl shadow-lg shadow-yellow-400/30">3</div>
+                    <div class="mt-6 mb-4">
+                        <i data-lucide="badge-dollar-sign" class="w-16 h-16 text-yellow-400 mx-auto mb-4 group-hover:scale-110 transition-transform"></i>
+                        <h3 class="font-display text-xl font-bold mb-2">Earn & Validate</h3>
+                        <p class="text-gray-400 text-sm">Get matched with opportunities, earn while learning, and build a verified skill portfolio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-4 relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="liquid-glass-strong rounded-3xl p-12 text-center relative overflow-hidden reveal">
+                <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-transparent to-orange-400/20"></div>
+                <div class="relative z-10">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                        Ready to <span class="text-gradient">Upgrade Your Brain</span>?
+                    </h2>
+                    <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                        Join millions of learners who are replacing outdated education with AI-powered, 
+                        income-connected skill acquisition.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="btn-primary px-8 py-4 rounded-full font-bold text-black text-lg hover:scale-105 transition-transform">
+                            Get Started Free
+                        </button>
+                        <button class="liquid-glass px-8 py-4 rounded-full font-semibold text-white hover:bg-white/10 transition-all">
+                            View Pricing
+                        </button>
+                    </div>
+                    <p class="mt-6 text-sm text-gray-400">No credit card required • Cancel anytime • ISA available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
+                            <i data-lucide="brain-circuit" class="w-6 h-6 text-black"></i>
+                        </div>
+                        <span class="font-display font-bold text-2xl text-white">ELSIE</span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-sm mb-6">
+                        Democratizing education through AI, financial innovation, and human-centered design. 
+                        Learn without limits.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:bg-yellow-400/20 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5 text-gray-400"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:bg-yellow-400/20 transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5 text-gray-400"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:bg-yellow-400/20 transition-colors">
+                            <i data-lucide="github" class="w-5 h-5 text-gray-400"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full liquid-glass flex items-center justify-center hover:bg-yellow-400/20 transition-colors">
+                            <i data-lucide="youtube" class="w-5 h-5 text-gray-400"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-white">Platform</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-yellow-400 transition-colors">Home</a></li>
+                        <li><a href="#features" class="hover:text-yellow-400 transition-colors">Features</a></li>
+                        <li><a href="#technology" class="hover:text-yellow-400 transition-colors">Technology</a></li>
+                        <li><a href="#how-it-works" class="hover:text-yellow-400 transition-colors">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4 text-white">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Terms of Use</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">ISA Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section-divider mb-8"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>&copy; 2024 ELSIE Education Technologies. All rights reserved.</p>
+                <p>Designed with <span class="text-yellow-400">liquid intelligence</span> for human potential.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navigation Scroll Effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.remove('nav-hidden');
+                navbar.classList.add('nav-visible');
+            } else {
+                navbar.classList.add('nav-hidden');
+                navbar.classList.remove('nav-visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('hamburger-active');
+            mobileMenu.classList.toggle('mobile-menu-active');
+            document.body.style.overflow = mobileMenu.classList.contains('mobile-menu-active') ? 'hidden' : '';
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('hamburger-active');
+                mobileMenu.classList.remove('mobile-menu-active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            entry.target.textContent = Math.floor(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            entry.target.textContent = target + (target === 100 ? '+' : (target === 10 ? 'M+' : (target === 95 ? '%' : '/7')));
+                        }
+                    };
+                    
+                    updateCounter();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax Effect for Orbs
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 20;
+                const xOffset = (window.innerWidth / 2 - e.clientX) / speed;
+                const yOffset = (window.innerHeight / 2 - e.clientY) / speed;
+                orb.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(${1 + (index * 0.1)})`;
+            });
+        });
+
+        // Add tilt effect to feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
